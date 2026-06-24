@@ -2,6 +2,14 @@
 
 Aplicación de escritorio para **Windows** que permite hacer **capturas de pantalla (imagen)** y **grabaciones de vídeo** —a pantalla completa, por monitor o por área seleccionada— con **editor de anotaciones** y grabación a **calidad nativa** mediante FFmpeg.
 
+## ⬇️ Descargar (Windows 10/11)
+
+### ➡️ [**Descargar CapturaPro (instalador .exe)**](https://github.com/Octonove/capturapro/releases/latest/download/CapturaPro-Setup.exe)
+
+Descarga **directa** del instalador, sin registro. También puedes ver la [última versión y notas](https://github.com/Octonove/capturapro/releases/latest).
+
+> Si Windows muestra *"Windows protegió tu PC"* (es normal en programas nuevos sin firma): pulsa **Más información → Ejecutar de todas formas**. Se instala sin permisos de administrador.
+
 ---
 
 ## Funciones
