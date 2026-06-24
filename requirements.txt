@@ -1,0 +1,8 @@
+# Dependencias de ejecucion
+Pillow>=11.0
+mss>=10.0
+soundcard>=0.4.6      # captura de audio del sistema (loopback WASAPI) y microfono
+numpy>=2.0            # (dependencia de soundcard)
+
+# Solo para construir el .exe
+pyinstaller>=6.21

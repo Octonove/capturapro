@@ -1,0 +1,17 @@
+# Entornos y compilacion
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Salida de PyInstaller / Inno Setup
+/build/CapturaPro/
+/build/*.log
+/build/icon_preview.png
+/dist/
+/installer/
+
+# Artefactos de pruebas
+*.part
+ui_capturapro.png
+render_test.png
