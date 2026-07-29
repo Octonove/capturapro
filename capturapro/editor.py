@@ -15,7 +15,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from tkinter import colorchooser, filedialog, messagebox, ttk
 
-from PIL import Image, ImageDraw, ImageFont, ImageTk
+from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageTk
 
 from . import APP_NAME
 from .clipboard import copy_image
@@ -30,6 +30,7 @@ TOOLS = [
     ("line", "Linea"),
     ("pen", "Lapiz"),
     ("highlight", "Resaltador"),
+    ("blur", "Difuminar"),
     ("text", "Texto"),
 ]
 
@@ -93,7 +94,19 @@ def render_annotations(base: Image.Image, anns: list[Annotation]) -> Image.Image
         w = max(1, a.width)
         col = a.color
         pts = a.points
-        if a.kind == "arrow" and len(pts) >= 2:
+        if a.kind == "blur" and len(pts) >= 2:
+            # El difuminado necesita los pixeles de DEBAJO, asi que se aplica a la
+            # imagen base (no al overlay transparente). Intensidad ligada al
+            # control de Grosor. Las anotaciones dibujadas antes no se difuminan
+            # (van en el overlay), que es lo esperable al censurar el fondo.
+            box = [int(round(v)) for v in _bbox(pts[0], pts[1])]
+            box[0] = max(0, min(box[0], img.width - 2))
+            box[1] = max(0, min(box[1], img.height - 2))
+            box[2] = max(box[0] + 2, min(box[2], img.width))
+            box[3] = max(box[1] + 2, min(box[3], img.height))
+            region = img.crop(box).filter(ImageFilter.GaussianBlur(max(6, w * 3)))
+            img.paste(region, box)
+        elif a.kind == "arrow" and len(pts) >= 2:
             draw.line([pts[0], pts[1]], fill=col, width=w)
             head = _arrow_head(pts[0], pts[1], max(12, w * 4))
             draw.polygon(head, fill=col)
@@ -304,6 +317,11 @@ class EditorWindow:
         elif tool == "ellipse":
             self._preview_id = self.canvas.create_oval(
                 x0, y0, x1, y1, outline=self.color, width=w)
+        elif tool == "blur":
+            # Tk no puede previsualizar un blur real en vivo: rectangulo punteado
+            # como guia; el difuminado autentico se ve al soltar (render PIL).
+            self._preview_id = self.canvas.create_rectangle(
+                x0, y0, x1, y1, outline="#8A97A8", width=2, dash=(5, 3))
 
     def _on_release(self, event: tk.Event) -> None:
         tool = self.tool.get()

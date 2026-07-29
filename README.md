@@ -19,7 +19,9 @@ Descarga **directa** del instalador, sin registro. También puedes ver la [últi
 - **Elegir pantalla** (seleccionar un monitor concreto).
 - **Área seleccionada** (arrastrar un rectángulo sobre cualquier pantalla).
 - **Editor** integrado tras cada captura:
-  - Flechas, líneas, rectángulos, elipses, lápiz libre, **resaltador** y **texto**.
+  - Flechas, líneas, rectángulos, elipses, lápiz libre, **resaltador**, **texto** y
+    **difuminado** (censura datos sensibles arrastrando un rectángulo; la intensidad
+    se controla con el Grosor).
   - Color y grosor configurables, tamaño de fuente para el texto.
   - Deshacer / rehacer (Ctrl+Z / Ctrl+Y).
   - **Guardar** (PNG o JPG a resolución original, sin perder calidad) o **copiar al portapapeles** (Ctrl+C).

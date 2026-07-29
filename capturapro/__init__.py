@@ -7,6 +7,6 @@ mediante FFmpeg.
 """
 
 APP_NAME = "CapturaPro"
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.1.0"
 
 __all__ = ["APP_NAME", "APP_VERSION"]

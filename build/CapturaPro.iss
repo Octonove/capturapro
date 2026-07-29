@@ -4,7 +4,7 @@
 ; Instalacion por usuario (sin permisos de administrador).
 
 #define MyAppName "CapturaPro"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.1.0"
 #define MyAppPublisher "CapturaPro"
 #define MyAppExeName "CapturaPro.exe"
 

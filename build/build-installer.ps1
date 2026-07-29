@@ -29,14 +29,26 @@ Write-Host "ISCC: $iscc" -ForegroundColor Green
 New-Item -ItemType Directory -Force -Path (Join-Path $root "installer") | Out-Null
 
 Write-Host "== Compilando instalador ==" -ForegroundColor Cyan
-& $iscc (Join-Path $PSScriptRoot "CapturaPro.iss")
+# Se compila a una carpeta TEMPORAL (via /O) porque el Windows Search Indexer
+# bloquea intermitentemente la carpeta de salida bajo el perfil e Inno falla con
+# "EndUpdateResource failed (110)". Luego se mueve a installer\.
+# (Mismo arreglo que CapturaStudio y GuiaClick.)
+$tmpOut = Join-Path $env:TEMP "CapturaPro_setup_build"
+New-Item -ItemType Directory -Force -Path $tmpOut | Out-Null
+& $iscc "/O$tmpOut" (Join-Path $PSScriptRoot "CapturaPro.iss")
 $code = $LASTEXITCODE
 
 if ($code -eq 0) {
-    $out = Get-ChildItem (Join-Path $root "installer\CapturaPro-Setup-*.exe") -ErrorAction SilentlyContinue |
-           Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    $built = Get-ChildItem (Join-Path $tmpOut "CapturaPro-Setup-*.exe") -ErrorAction SilentlyContinue |
+             Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    if (-not $built) {
+        Write-Host "`nNo se encontro el instalador compilado en $tmpOut." -ForegroundColor Red
+        exit 1
+    }
+    $dest = Join-Path $root ("installer\" + $built.Name)
+    Move-Item -Force -Path $built.FullName -Destination $dest
     Write-Host "`n== LISTO ==" -ForegroundColor Green
-    if ($out) { Write-Host ("Instalador: {0}  ({1} MB)" -f $out.FullName, [math]::Round($out.Length/1MB,1)) }
+    Write-Host ("Instalador: {0}  ({1} MB)" -f $dest, [math]::Round((Get-Item $dest).Length/1MB,1))
 } else {
     Write-Host "`nLa compilacion del instalador fallo (codigo $code)." -ForegroundColor Red
     exit $code
