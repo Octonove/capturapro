@@ -2,6 +2,11 @@
 
 Aplicación de escritorio para **Windows** que permite hacer **capturas de pantalla (imagen)** y **grabaciones de vídeo** —a pantalla completa, por monitor o por área seleccionada— con **editor de anotaciones** y grabación a **calidad nativa** mediante FFmpeg.
 
+<!-- invokard-coffee -->
+**&#9749; Si esto te ahorra tiempo, inv&iacute;tame a un caf&eacute;.** [![Inv&iacute;tame a un caf&eacute; con PayPal](https://img.shields.io/badge/PayPal-Inv%C3%ADtame%20a%20un%20caf%C3%A9-00457C?logo=paypal&logoColor=white)](https://www.paypal.com/donate/?business=stradoxx%40gmail.com&no_recurring=0&currency_code=EUR&item_name=Support%20capturapro)
+
+**USDC** &middot; Solana `5n6Gfosk7SdwbvdtE9xiLWpcGPBBBGDZYRfAkWyCk86g` &middot; Ethereum (ERC-20) `0xe176866f9d7fdb498e0d4a983d3e34d84dcd6bfc`
+
 ## ⬇️ Descargar (Windows 10/11)
 
 ### ➡️ [**Descargar CapturaPro (instalador .exe)**](https://github.com/Octonove/capturapro/releases/latest/download/CapturaPro-Setup.exe)
